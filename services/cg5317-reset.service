@@ -1,0 +1,12 @@
+[Unit]
+Description=cg5317 Device Reset Service
+Before=cg5317-bringup.service
+
+[Service]
+ExecStart=/bin/sh -c '/usr/bin/gpioset -m time -s 1 gpiochip0 39=1 && /usr/bin/gpioset -m time -s 1 gpiochip0 39=0 && /usr/bin/gpioset gpiochip0 39=1'
+User=root
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
